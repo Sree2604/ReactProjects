@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Resource = ({ adder }) => {
+const Resource = ({ data,adder }) => {
     const [componentType, setComponentType] = useState("");
     const [method, setMethod] = useState("");
     const [link, setLink] = useState("");
@@ -10,7 +10,8 @@ const Resource = ({ adder }) => {
         console.log("Submitted");
         adder({ componentType, method, link });
 
-        setComponentType("");
+        // setComponentType("");
+        compt.value='';
         setMethod("");
         setLink("");
     };
@@ -24,7 +25,7 @@ const Resource = ({ adder }) => {
                         <label htmlFor="ComponentType" className="block text-sm font-medium text-gray-700">
                             ComponentType
                         </label>
-                        <input
+                        {/* <input
                             type="text"
                             id="ComponentType"
                             placeholder="Enter ComponentType"
@@ -32,7 +33,20 @@ const Resource = ({ adder }) => {
                             onChange={(e) => setComponentType(e.target.value)}
                             className="w-full border rounded py-2 px-3 mt-1 focus:outline-none focus:ring focus:border-blue-300"
                             required
-                        />
+                        /> */}
+                        <input 
+                        id="compt"
+                        type="text" 
+                        list="componentType" 
+                        placeholder="Enter Component Type" 
+                        className="w-full border rounded py-2 px-3 mt-1 focus:outline-none focus:ring focus:border-blue-300"
+                        onChange={(e) => setComponentType(e.target.value)}
+                        required/>
+                        <datalist id="componentType" >
+
+                        {data.map((compt)=>(<option value={compt.component_type} key={compt.component_type} >{compt.component_type}</option>))}
+
+                        </datalist> 
                     </div>
                     <div className="mb-4">
                         <label htmlFor="component" className="block text-sm font-medium text-gray-700">
@@ -47,6 +61,7 @@ const Resource = ({ adder }) => {
                             className="w-full border rounded py-2 px-3 mt-1 focus:outline-none focus:ring focus:border-blue-300"
                             required
                         />
+                        
                     </div>
                     <div className="mb-4">
                         <label htmlFor="componentType" className="block text-sm font-medium text-gray-700">
