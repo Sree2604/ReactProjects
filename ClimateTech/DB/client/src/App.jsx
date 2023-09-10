@@ -1,26 +1,52 @@
 import { useState,useEffect } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Inserter from './components/Inserter';
 import Resource from './components/Resource';
 import NavBar from './components/NavBar';
+import ViewData from './components/ViewData';
+// import InsertData from './components/InsertData';
+import GridData from './components/GridData';
+import Updater from './components/UpdateData';
+
 
 function App() {
+  const [allData,setAllData] = useState([])
   const [main_data,setMainData] = useState([])
   const [resource_data,setResourceData] = useState([])
   useEffect(()=>{                     //this function is used to render the screen with new data
     const getTables= async () =>{
-      const dataFromServer = await fetchTable()
-      setMainData(dataFromServer)
+      const dataFromServer = await fetchData()
+      const mainDataFromServer = await fetchMainData()
+      const resDataFromServer = await fetchResData()
+      setMainData(mainDataFromServer)
+      setResourceData(resDataFromServer)
+      setAllData(dataFromServer)
     }
     getTables()
   },[]) 
   
-  const fetchTable= async ()=>{
-    const res = await fetch('http://localhost:5000/')
+
+
+  const fetchData= async ()=>{
+    const res = await fetch('http://localhost:5000/methods')
     const data = await res.json()
     return data
   }
+
+  const fetchMainData= async ()=>{
+    const res = await fetch('http://localhost:5000/main')
+    const data = await res.json()
+    return data
+  }
+
+  const fetchResData= async ()=>{
+    const res = await fetch('http://localhost:5000/resource')
+    const data = await res.json()
+    return data
+  }
+
   const addDetails_main = async (details) =>{    //function to POST the card details to json
     const res = await fetch('http://localhost:5000/methodsmain',{
       method: 'POST',
@@ -31,7 +57,6 @@ function App() {
     })
     const resp = await res.json()
     setMainData([...main_data, resp])
-    console.log("Hello");
   }
   const addDetails_resource = async (details) =>{    //function to POST the card details to json
     const res = await fetch('http://localhost:5000/methodsresource',{
@@ -42,8 +67,7 @@ function App() {
       body: JSON.stringify(details)
     })
     const resp = await res.json()
-    setResourceData([...data, resp])
-    Console.log("Hello");
+    setResourceData([...resource_data, resp])
   }
 
   return (
@@ -52,12 +76,13 @@ function App() {
           
           <NavBar/>
           <br></br>
-          
           <Routes>
 
           <Route path='/main' element={<Inserter data={main_data} adder={addDetails_main}/>}/>
-
-          <Route path='/resource' element={<Resource data={resource_data} adder={addDetails_resource}/>}/>
+          <Route path='/grid' element={<GridData data={allData}/>}/>
+          <Route path='/view' element={<ViewData data={allData}/>}/>
+          <Route path='/update' element={<Updater data={allData}/>}/>
+          <Route path='/resource' element={<Resource mainData={main_data} resData={resource_data} adder={addDetails_resource}/>}/>
           
           </Routes>
           </Router>
