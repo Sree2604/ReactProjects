@@ -174,14 +174,14 @@ fetchLink()
       {showRes && !showMain && (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
           <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
-            <h1 className="text-2xl font-semibold mb-6 text-center">
+            <h1 className="text-2xl font-semibold font-navhead mb-6 text-center">
               Resource Table
             </h1>
             <form onSubmit={HandleSubmission}>
               <div className="mb-4">
                 <label
                   htmlFor="ComponentType"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-sidebody text-gray-700"
                 >
                   ComponentType
                 </label>
@@ -313,16 +313,16 @@ fetchLink()
         </div>
       )}
       {showMain && !showRes && (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-          <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
-            <h1 className="text-2xl font-semibold mb-6 text-center">
+        <div className="flex items-center justify-center min-h-screen bg-gray-300">
+          <div className="bg-gray-200 rounded-lg shadow-md p-8 w-full max-w-md ">
+            <h1 className="text-2xl font-navhead mb-6 text-center">
               Main Table
             </h1>
             <form onSubmit={HandleSubmission}>
               <div className="mb-4">
                 <label
                   htmlFor="location"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-l font-sidebody text-gray-700"
                 >
                   Location
                 </label>
@@ -330,7 +330,7 @@ fetchLink()
                 <div>
                   <div>
                     <input
-                      className="w-full border rounded py-2 px-3 mt-1 focus:outline-none focus:ring focus:border-blue-300"
+                      className="w-full border rounded py-2 px-3 mt-1 bg-gray-100 font-navhead  focus:outline-none focus:ring focus:border-emerald-400"
                       type="text"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
@@ -360,15 +360,14 @@ fetchLink()
               <div className="mb-4">
                 <label
                   htmlFor="component"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-l font-sidebody text-gray-700"
                 >
                   Component
                 </label>
                 <div>
                   <div>
                     <input
-                      className="w-full border rounded py-2 px-3 mt-1 focus:outline-none focus:ring focus:border-blue-300"
-                      type="text"
+                      className="w-full border rounded py-2 px-3 mt-1 bg-gray-100 font-navhead  focus:outline-none focus:ring focus:border-emerald-400"                      type="text"
                       value={component}
                       onChange={(e) => setComponent(e.target.value)}
                     />
@@ -395,14 +394,14 @@ fetchLink()
               <div className="mb-4">
                 <label
                   htmlFor="componentType"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-l font-sidebody text-gray-700"
                 >
                   Component Type
                 </label>
                 <div>
                   <div>
                     <input
-                      className="w-full border rounded py-2 px-3 mt-1 focus:outline-none focus:ring focus:border-blue-300"
+                      className="w-full border rounded py-2 px-3 mt-1 bg-gray-100 font-navhead focus:outline-none focus:ring focus:border-emerald-400"                      
                       type="text"
                       value={componentType}
                       onChange={(e) => setComponentType(e.target.value)}
@@ -433,7 +432,7 @@ fetchLink()
                 <button
                   onClick={changeState}
                   type="submit"
-                  className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="w-full py-2 px-4 bg-teal-500 text-l text-white font-sidehead rounded hover:bg-teal-600"
                 >
                   Insert
                 </button>

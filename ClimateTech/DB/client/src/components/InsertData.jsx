@@ -9,7 +9,7 @@ const InsertData = () => {
   return (
     <>
       <Form>
-        <Form.Group className="mb-3" controlId="formBasicText">
+        <Form.Group className="mb-3 font-navhead" controlId="formBasicText">
           <Form.Label>Component Type</Form.Label>
           <Form.Control
             type="text"

@@ -125,6 +125,17 @@ app.post("/methodsresource", async(req,res)=>{ //insert
     }
 })
 
+app.delete("/delete_main/:id", async(req,res)=>{
+    try {
+        
+        const { id } = req.params;
+        const qry = await pool.query("delete from main_data where id=$1",[id]);
+        res.json("delete successful");
+
+    } catch (error) {
+        console.log(error);
+    }
+})
 app.listen(5000,()=>{
     console.log('Server is running on port 5000');
 })

@@ -6,9 +6,15 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Poppins"],
-    },
+      fontFamily:{
+        body:['Crafty Girls'],
+        head:['Gloria Hallelujah'],
+        marker:['Permanent Marker'],
+        header:['Russo One'],
+        navhead:['Courgette'],
+        sidehead:['Courgette'],
+        sidebody:['Sriracha']
+      },
     },
   },
   plugins: [],

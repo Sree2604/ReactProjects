@@ -3,10 +3,11 @@ import Box from "@mui/material/Box";
 import Button from "react-bootstrap/Button";
 import { DataGridPro } from "@mui/x-data-grid-pro";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import Alert from "@mui/material/Alert";
 
-export default function ControlMasterDetail({ data }) {
+export default function ControlMasterDetail({ data,onDelete }) {
   const [detailPanelExpandedRowIds, setDetailPanelExpandedRowIds] =
     React.useState([]);
     const navigate = useNavigate();
@@ -14,11 +15,20 @@ export default function ControlMasterDetail({ data }) {
     setDetailPanelExpandedRowIds(newIds);
   }, []);
 
+
   const columns = [
-    { field: "id", headerName: "ID" },
     { field: "location", headerName: "Location", width: 200 },
     { field: "component", headerName: "Component" },
     { field: "component_type", headerName: "Component Type" },
+    {
+      field: 'link',
+      headerName: 'Link',
+      renderCell: (params) => (
+        <Link to={`${params.row.link}`}>{params.row.link}</Link>
+      ),
+      sortable: false,
+      width: 160
+    },
     {
       field: "Update",
       renderCell: (params) => {
@@ -26,7 +36,6 @@ export default function ControlMasterDetail({ data }) {
         const id = rowData.id;
         const res_id = rowData.res_id;
         const location = rowData.location;
-  
         const component = rowData.component;
         const component_type = rowData.component_type;
         const rid = rowData.rid;
@@ -50,7 +59,29 @@ export default function ControlMasterDetail({ data }) {
           </Button>
         );
       },
-      headerName: "Reference ID",
+      headerName: "Update",
+      width: 160,
+      editable: false,
+    },
+    {
+      field: "Delete",
+      renderCell: (params) => {
+        const rowData = params.row;
+        const id = rowData.id;
+
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              onDelete(id)
+            }}
+          >
+            Delete
+          </Button>
+        );
+      },
+      headerName: "Delete",
       width: 160,
       editable: false,
     },

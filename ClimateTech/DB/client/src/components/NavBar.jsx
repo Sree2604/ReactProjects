@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 
+
 function NavBar() {
     return (
-        <nav className="bg-gradient-to-r from-purple-500 to-indigo-600 border-b-4 border-indigo-700 shadow-lg p-4">
-            <div className="container mx-auto">
+        <nav className=" border-b-4 border-teal-700 shadow-lg p-4">
+            <div className="container-fluid">
                 <div className="flex items-center justify-between space-x-4">
-                    <Link to="/resource" className="text-2xl font-bold text-black">
+                    <Link to="/resource" className="text-2xl font-navhead text-green-950 hover:text-green-400 transition duration-300">
                         Admin Page
                     </Link>
                     <div className="hidden lg:flex space-x-6">
@@ -17,13 +18,13 @@ function NavBar() {
                         </Link> */}
                         <Link
                             to="/view"
-                            className="text-indigo-300 hover:text-black transition duration-300"
+                            className="text-green-950 hover:text-green-400 transition duration-300 text-xl font-bold font-body"
                         >
                             View Data
                         </Link>
                         <Link
                             to="/resource"
-                            className="text-indigo-300 hover:text-black transition duration-300"
+                            className="text-green-950 hover:text-green-400 transition duration-300 text-xl font-bold font-body"
                         >
                             Resource Table
                         </Link>

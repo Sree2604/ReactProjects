@@ -70,6 +70,15 @@ function App() {
     setResourceData([...resource_data, resp])
   }
 
+  const deleteMain = async (id)=>{    //the method for deleting json data
+
+    await fetch(`http://localhost:5000/delete_main/${id}`,
+    {method: 'DELETE'})
+    setMainData(main_data.filter((val)=> val.id !==id,
+    console.log(id)
+    ))
+}
+
   return (
     <>
     <Router>
@@ -77,10 +86,10 @@ function App() {
           <NavBar/>
           <br></br>
           <Routes>
-
+          <Route path='/' element={<Resource mainData={main_data} resData={resource_data} adder={addDetails_resource}/>}/>
           <Route path='/main' element={<Inserter data={main_data} adder={addDetails_main}/>}/>
-          <Route path='/grid' element={<GridData data={allData}/>}/>
-          <Route path='/view' element={<ViewData data={allData}/>}/>
+          <Route path='/view' element={<GridData data={allData} onDelete={deleteMain}/>}/>
+          {/* <Route path='/view' element={<ViewData data={allData}/>}/> */}
           <Route path='/update' element={<Updater data={allData}/>}/>
           <Route path='/resource' element={<Resource mainData={main_data} resData={resource_data} adder={addDetails_resource}/>}/>
           
