@@ -7,11 +7,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Tangerine:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Crafty+Girls&family=Gloria+Hallelujah&family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alike+Angular&family=Black+Ops+One&family=Concert+One&family=Courgette&family=Kavoon&family=Monoton&family=Trocchi&family=Vesper+Libre&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,100;1,400;1,700;1,900&family=Sriracha&display=swap');
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
-
-

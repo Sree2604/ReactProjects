@@ -13,7 +13,8 @@ export default {
         header:['Russo One'],
         navhead:['Courgette'],
         sidehead:['Courgette'],
-        sidebody:['Sriracha']
+        sidebody:['Sriracha'],
+        admin:['Lato']
       },
     },
   },

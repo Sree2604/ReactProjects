@@ -20,6 +20,7 @@
     "@mui/x-data-grid": "^6.13.0",
     "@mui/x-data-grid-pro": "^6.13.0",
     "react": "^18.2.0",
+    "react-crud-icons": "^1.2.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
     "styled-components": "^5.3.11"
