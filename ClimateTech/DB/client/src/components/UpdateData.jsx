@@ -56,7 +56,9 @@ const Updater = ({ data, update }) => {
   const sLink = JSON.parse(sessionStorage.getItem("update_main"))["link"];
   const sCommonId = JSON.parse(sessionStorage.getItem("update_main"))["res_id"];
   const sReuse = JSON.parse(sessionStorage.getItem("update_main"))["reuse"];
-  const [reuse, setReuses] = useState([]);
+  const sReduce = JSON.parse(sessionStorage.getItem("update_main"))["reduce"];
+  const sRecycle = JSON.parse(sessionStorage.getItem("update_main"))["recycle"];
+  const [reuse, setReuses] = useState([...sReuse]);
   const handleReuseChange = (index, value) => {
     const updatedReuses = [...reuse];
     updatedReuses[index] = value;
@@ -74,7 +76,7 @@ const Updater = ({ data, update }) => {
     setReuses(updatedReuses);
   };
 
-  const [reduce, setReduces] = useState([]);
+  const [reduce, setReduces] = useState([...sReduce]);
 
   const handleReduceChange = (index, value) => {
     const updatedReduces = [...reduce];
@@ -92,7 +94,7 @@ const Updater = ({ data, update }) => {
     setReduces(updatedReduces);
   };
 
-  const [recycle, setRecycles] = useState([]);
+  const [recycle, setRecycles] = useState([...sRecycle]);
 
   const handleRecycleChange = (index, value) => {
     const updatedRecycles = [...recycle];
@@ -280,7 +282,7 @@ const Updater = ({ data, update }) => {
               </div>
               
               <div >
-                {sReuse.map((item, index) => (
+                {reuse.map((item, index) => (
                   <div key={index} className="relative w-full">
                     <input
                       type="text"
