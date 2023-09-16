@@ -19,6 +19,7 @@
     "@mui/styled-engine-sc": "^5.14.8",
     "@mui/x-data-grid": "^6.13.0",
     "@mui/x-data-grid-pro": "^6.13.0",
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-crud-icons": "^1.2.3",
     "react-dom": "^18.2.0",

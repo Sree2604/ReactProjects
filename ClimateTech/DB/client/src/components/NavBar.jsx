@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useState } from "react";
+import { Offcanvas } from "bootstrap";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-function NavBar() {
+function NavBar({data}) {
+  const [offCanvas, showOffCanvas] = useState(false);
+  const closeModal = () => {
+    showOffCanvas(false);
+  };
+  const navigate = useNavigate();
   return (
+    <>
     <nav className=" border-b-4 border-green-600 shadow-md p-4">
       <div className="container-fluid">
         <div className="flex items-center justify-between space-x-4">
@@ -27,11 +34,28 @@ function NavBar() {
             >
               Insert Data
             </Link>
+            <Button onClick={()=>navigate('/kitchen')}>Show Details</Button>
+            
             
           </div>
         </div>
       </div>
     </nav>
+    {offCanvas && (
+      <Offcanvas show={offCanvas} onHide={closeModal}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {data.map((item) => (
+            <Button onClick={()=>navigate(`/${item.location}`)}>
+              {item.location}
+            </Button>
+          ))}
+        </Offcanvas.Body>
+      </Offcanvas>
+    )}
+    </>
   );
 }
 

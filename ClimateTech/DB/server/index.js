@@ -1,14 +1,44 @@
+const dotenv = require('dotenv');
+dotenv.config()
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const jwt = require('jsonwebtoken');
 
 //Middleware
 app.use(cors());
 app.use(express.json());
 
+const port = process.env.PORT;
+const secretKey = process.env.JWT_SECRET; 
+const uname=process.env.U_NAME;
+const upass=process.env.U_PASS;
+const id=process.env.ID;
+
+const authMiddleware = (req, res, next) => {
+  if (!req.headers['authorization']) {
+    return res.status(401).send({ message: 'Unauthorized access' })
+  }
+  const authHeader=req.headers['authorization'];
+  const token=authHeader.split(" ")[1];
+  try{
+    const tokenPayload=jwt.verify(token,secretKey);
+    if(tokenPayload){
+      next();
+    }
+    else{
+      return res.status(401).send({ message: 'Unauthorized access' })
+    }
+  }
+  catch(error){
+    return res.status(401).send({ message: 'Unauthorized access' })
+  }
+}
+
 //Display todo
-app.get("/", async (req, res) => {
+
+app.get("/main",authMiddleware, async (req, res) => {
   try {
     const qry = await pool.query("SELECT * FROM main_data;");
     res.json(qry.rows);
@@ -17,16 +47,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/main", async (req, res) => {
-  try {
-    const qry = await pool.query("SELECT * FROM main_data;");
-    res.json(qry.rows);
-  } catch (err) {
-    console.log(err.message);
-  }
-});
-
-app.get("/resource", async (req, res) => {
+app.get("/resource",authMiddleware, async (req, res) => {
   try {
     const qry = await pool.query("SELECT * FROM resource_data;");
     res.json(qry.rows);
@@ -35,7 +56,7 @@ app.get("/resource", async (req, res) => {
   }
 });
 
-app.get("/methods", async (req, res) => {
+app.get("/methods",authMiddleware, async (req, res) => {
   try {
     const qry = await pool.query(
       `SELECT main_data.rid,main_data.id,main_data.location,main_data.component,main_data.component_type,resource_data.res_id,resource_data.reuse,resource_data.reduce,resource_data.recycle,resource_data.link FROM main_data JOIN resource_data ON main_data.rid = resource_data.res_id or main_data.component_type=resource_data.component_type;`
@@ -120,6 +141,20 @@ app.delete("/delete_main/:component_type", async (req, res) => {
     console.log(error);
   }
 });
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+
+app.post('/login', async(req, res) => {         //for usage with client side
+  const { username, password } = req.body;
+  const user = ((username===uname) && (password===upass));
+    if (!user) {
+    return res.status(401).json({ message: 'Authentication failed' });
+  }
+  console.log(username,password)
+  const token = jwt.sign({ userId: id }, secretKey, { expiresIn: '1h' });
+  console.log(token);
+  
+  res.json({ token });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port${port}`);
 });

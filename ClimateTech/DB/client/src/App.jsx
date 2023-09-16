@@ -6,14 +6,51 @@ import Resource from "./components/Resource";
 import NavBar from "./components/NavBar";
 import GridData from "./components/GridData";
 import Updater from "./components/UpdateData";
-import ShowGrid from "./components/ShowGrid";
+import api from "./api";
+import Login from "./components/Login";
+import config from "../config.json";
+import Displaypages from "./components/DisplayPages";
+
 
 function App() {
   const [allData, setAllData] = useState([]);
   const [main_data, setMainData] = useState([]);
   const [resource_data, setResourceData] = useState([]);
+  const [verify,setVerify] = useState(false);
   
   useEffect(() => {
+    
+    const auth = async () => {
+      const username = import.meta.env.VITE_UNAME;
+      const password = import.meta.env.VITE_UPASS;
+      console.log(import.meta.env.VITE_UNAME);
+      console.log(import.meta.env.VITE_UPASS);
+
+
+    ///fn starts
+    try {
+      const response = await fetch("https://cool-shrimps-trade.loca.lt/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+  
+      if (response.ok) {
+        const { token } = await response.json();
+        localStorage.setItem("token", token);
+        setVerify(true);
+        console.log("Login successful");
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } //fn ends
+    };
+    auth();
+
     const getTables = async () => {
       const dataFromServer = await fetchData();
       const mainDataFromServer = await fetchMainData();
@@ -25,20 +62,24 @@ function App() {
     getTables();
   }, []);
 
+  // useEffect(()=> {
+  //   auth()
+  // },verify)
+
   const fetchData = async () => {
-    const res = await fetch("http://localhost:5000/methods");
+    const res = await api.get("https://cool-shrimps-trade.loca.lt/methods");
     const data = await res.json();
     return data;
   };
 
   const fetchMainData = async () => {
-    const res = await fetch("http://localhost:5000/main");
+    const res = await api.get("http://localhost:5000/main");
     const data = await res.json();
     return data;
   };
 
   const fetchResData = async () => {
-    const res = await fetch("http://localhost:5000/resource");
+    const res = await api.get("http://localhost:5000/resource");
     const data = await res.json();
     return data;
   };
@@ -73,11 +114,10 @@ function App() {
     });
     setAllData(allData.filter((val) => val.component_type !== component_type, console.log(component_type)));
   };
-
   return (
     <>
       <Router>
-        <NavBar />
+        <NavBar data={allData}/>
         <br></br>
         <Routes>
           <Route
@@ -95,7 +135,8 @@ function App() {
             element={<GridData data={allData} onDelete={deleteMain} />}
           />
           <Route path="/update" element={<Updater data={allData} />} />
-          <Route path="/grid" element={<ShowGrid data={allData} />} />
+         
+          {allData.map((item)=> <Route path={`/${item.location}`} element={<Displaypages pagedetails={item}/>}/>)}
           <Route
             path="/resource"
             element={
