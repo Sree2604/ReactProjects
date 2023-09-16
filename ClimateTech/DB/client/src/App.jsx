@@ -8,7 +8,6 @@ import GridData from "./components/GridData";
 import Updater from "./components/UpdateData";
 import api from "./api";
 import Login from "./components/Login";
-import config from "../config.json";
 import Displaypages from "./components/DisplayPages";
 
 
@@ -29,7 +28,7 @@ function App() {
 
     ///fn starts
     try {
-      const response = await fetch("https://cool-shrimps-trade.loca.lt/login", {
+      const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +66,7 @@ function App() {
   // },verify)
 
   const fetchData = async () => {
-    const res = await api.get("https://cool-shrimps-trade.loca.lt/methods");
+    const res = await api.get("http://localhost:5000/methods");
     const data = await res.json();
     return data;
   };
@@ -107,12 +106,12 @@ function App() {
     setResourceData([...resource_data, resp]);
   };
 
-  const deleteMain = async (component_type) => {
+  const deleteMain = async (id) => {
 
-    await fetch(`http://localhost:5000/delete_main/${component_type}`, {
+    await fetch(`http://localhost:5000/delete_main/${id}`, {
       method: "DELETE",
     });
-    setAllData(allData.filter((val) => val.component_type !== component_type, console.log(component_type)));
+    setAllData(allData.filter((val) => val.id !== id, console.log(id)));
   };
   return (
     <>

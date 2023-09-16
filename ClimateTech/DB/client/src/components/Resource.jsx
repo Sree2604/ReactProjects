@@ -201,7 +201,7 @@ const Resource = ({ resData, mainData, adder }) => {
                   <div>
                     {unique_location
                       .filter((item) => {
-                        const searchTerm = location.toLowerCase();
+                        const searchTerm = location.toString().toLowerCase();
                         const temp = new String(item);
                         const loc = temp.toLowerCase();
                         return (
@@ -212,7 +212,7 @@ const Resource = ({ resData, mainData, adder }) => {
                       })
 
                       .map((loc) => (
-                        <div onClick={() => setLocation(location)}>{loc}</div>
+                        <div className=" w-full border rounded py-2 px-3 mt-1 bg-gray-50 font-admin cursor-pointer" onClick={() => setLocation(loc)}>{loc}</div>
                       ))}
                   </div>
                 </div>
@@ -222,7 +222,7 @@ const Resource = ({ resData, mainData, adder }) => {
                   htmlFor="componentType"
                   className="block font-bold text-l font-admin text-gray-700"
                 >
-                  Obstacle
+                  Object
                 </label>
                 <div>
                   <div>
@@ -248,7 +248,7 @@ const Resource = ({ resData, mainData, adder }) => {
                       })
 
                       .map((compType) => (
-                        <div onClick={() => setComponentType(compType)}>
+                        <div className=" w-full border rounded py-2 px-3 mt-1 bg-gray-50 font-admin cursor-pointer" onClick={() => setComponentType(compType)}>
                           {compType}
                         </div>
                       ))}
@@ -260,7 +260,7 @@ const Resource = ({ resData, mainData, adder }) => {
                   htmlFor="component"
                   className="block font-bold text-l font-admin text-gray-700"
                 >
-                  Obstacle Type
+                  Object Type
                 </label>
                 <div>
                   <div>
@@ -268,7 +268,7 @@ const Resource = ({ resData, mainData, adder }) => {
                       className="w-full shadow-md rounded py-2 px-3 mt-1 bg-gray-50 font-admin  focus:outline-none focus:ring focus:border-emerald-400"
                       type="text"
                       value={component}
-                      placeholder="What is the obstacle tends to?"
+                      placeholder="What is the type of object?"
                       onChange={(e) => setComponent(e.target.value)}
                     />
                   </div>
@@ -286,7 +286,7 @@ const Resource = ({ resData, mainData, adder }) => {
                       })
 
                       .map((comp) => (
-                        <div onClick={() => setComponent(comp)}>{comp}</div>
+                        <div className=" w-full border rounded py-2 px-3 mt-1 bg-gray-50 font-admin cursor-pointer" onClick={() => setComponent(comp)}>{comp}</div>
                       ))}
                   </div>
                 </div>
@@ -319,7 +319,7 @@ const Resource = ({ resData, mainData, adder }) => {
                   htmlFor="ComponentType"
                   className="block font-bold text-l font-admin text-gray-700"
                 >
-                  Obstacle Type
+                  Object Type
                 </label>
                 <div>
                   <div>
@@ -327,7 +327,7 @@ const Resource = ({ resData, mainData, adder }) => {
                       className="w-full shadow-md rounded py-2 px-3 mt-1 bg-gray-50 font-admin  focus:outline-none focus:ring focus:border-emerald-400"
                       type="text"
                       value={componentType}
-                      placeholder="Enter the Component Type"
+                      placeholder="Waht is the type of object?"
                       onChange={(e) => setComponentType(e.target.value)}
                     />
                   </div>
@@ -371,8 +371,8 @@ const Resource = ({ resData, mainData, adder }) => {
               <div >
                 {reuse.map((item, index) => (
                   <div key={index} className="relative w-full">
-                    <input
-                      type="text"
+                    <textarea
+                      
                       id={`reuse_${index}`}
                       placeholder={`Enter Reuse ${index + 1} Method`}
                       value={item}
@@ -411,7 +411,7 @@ const Resource = ({ resData, mainData, adder }) => {
               <div>
                 {reduce.map((item, index) => (
                   <div key={index} className="relative w-full">
-                    <input
+                    <textarea
                       type="text"
                       id={`reduce_${index}`}
                       placeholder={`Enter Reduce ${index + 1} Method`}
@@ -455,7 +455,7 @@ const Resource = ({ resData, mainData, adder }) => {
                 {recycle.map((item, index) => (
                   <div key={index} className="relative w-full">
                    
-                    <input
+                    <textarea
                       type="text"
                       id={`recycle_${index}`}
                       placeholder={`Enter Recycle ${index + 1} Method`}

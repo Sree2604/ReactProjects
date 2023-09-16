@@ -62,7 +62,7 @@ app.get("/methods",authMiddleware, async (req, res) => {
       `SELECT main_data.rid,main_data.id,main_data.location,main_data.component,main_data.component_type,resource_data.res_id,resource_data.reuse,resource_data.reduce,resource_data.recycle,resource_data.link FROM main_data JOIN resource_data ON main_data.rid = resource_data.res_id or main_data.component_type=resource_data.component_type;`
     );
     res.json(qry.rows);
-    console.log(qry.rows);
+    // console.log(qry.rows);
   } catch (err) {
     console.log(err.message);
   }
@@ -125,16 +125,12 @@ app.post("/methodsresource", async (req, res) => {
   }
 });
 
-app.delete("/delete_main/:component_type", async (req, res) => {
+app.delete("/delete_main/:id", async (req, res) => {
   try {
-    const { component_type } = req.params;
+    const { id } = req.params;
     const qry = await pool.query(
-      "delete from main_data where component_type=$1",
-      [component_type]
-    );
-    const qry1 = await pool.query(
-      "delete from resource_data where component_type=$1",
-      [component_type]
+      "delete from main_data where id=$1",
+      [id]
     );
     res.json("delete successful");
   } catch (error) {

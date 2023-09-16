@@ -112,7 +112,7 @@ const Updater = ({ data, update }) => {
     setRecycles(updatedMethods);
   };
 
-  const [link, setLink] = useState([]);
+  const [link, setLink] = useState([...sLink]);
   const handleLinkChange = (index, value) => {
     const updatedLinks = [...link];
     updatedLinks[index] = value;
@@ -284,7 +284,7 @@ const Updater = ({ data, update }) => {
               <div >
                 {reuse.map((item, index) => (
                   <div key={index} className="relative w-full">
-                    <input
+                    <textarea
                       type="text"
                       id={`reuse_${index}`}
                       placeholder={`Enter Reuse ${index + 1} Method`}
@@ -324,7 +324,7 @@ const Updater = ({ data, update }) => {
               <div>
                 {reduce.map((item, index) => (
                   <div key={index} className="relative w-full">
-                    <input
+                    <textarea
                       type="text"
                       id={`reduce_${index}`}
                       placeholder={`Enter Reduce ${index + 1} Method`}
@@ -368,7 +368,7 @@ const Updater = ({ data, update }) => {
                 {recycle.map((item, index) => (
                   <div key={index} className="relative w-full">
                    
-                    <input
+                    <textarea
                       type="text"
                       id={`recycle_${index}`}
                       placeholder={`Enter Recycle ${index + 1} Method`}
@@ -415,7 +415,7 @@ const Updater = ({ data, update }) => {
                       type="text"
                       id={`reuse_${index}`}
                       placeholder={`Enter Link ${index + 1}`}
-                      value={item}
+                      value={item || ''}
                       onChange={(e) => handleLinkChange(index, e.target.value)}
                       className="w-full shadow-md rounded py-2 px-3 mt-1 bg-gray-50 font-admin focus:outline-none focus:ring focus:border-emerald-400"
                       required

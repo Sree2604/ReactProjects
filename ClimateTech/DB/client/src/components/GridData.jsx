@@ -17,6 +17,13 @@ const GridData=({data,onDelete})=> {
       headerClassName: 'super-app-theme--header',
       headerAlign: 'center',
       headerBorder: 'green',
+      renderCell:(params)=>{
+        const rowData = params.row;
+        const location = (rowData.location[0]).toUpperCase()+(rowData.location).slice(1);
+        return(
+          <p>{location}</p>
+        )
+      },
       width: 150,
       editable: false,
     },
@@ -25,6 +32,13 @@ const GridData=({data,onDelete})=> {
       headerName: 'Component',
       headerClassName: 'super-app-theme--header',
       headerAlign: 'center',
+      renderCell:(params)=>{
+        const rowData = params.row;
+        const component = (rowData.component[0]).toUpperCase()+(rowData.component).slice(1);
+        return(
+          <p>{component}</p>
+        )
+      },
       width: 120,
       editable: false,
     },
@@ -33,6 +47,13 @@ const GridData=({data,onDelete})=> {
       headerName: 'Component Type',
       headerClassName: 'super-app-theme--header',
       headerAlign: 'center',
+      renderCell:(params)=>{
+        const rowData = params.row;
+        const componentType = (rowData.component_type[0]).toUpperCase()+(rowData.component_type).slice(1);
+        return(
+          <p>{componentType}</p>
+        )
+      },
       width: 163,
       editable: false,
     },
@@ -61,20 +82,6 @@ const GridData=({data,onDelete})=> {
         width: 195,
         editable: false,
       },
-      // {
-      //   field: 'link',
-      //   headerName: 'Link',
-      //   headerClassName: 'super-app-theme--header',
-      //   headerAlign: 'center',
-      //   renderCell: (params) => {
-            
-      //       <Link href={params.value}>
-      //         {params.value}
-      //       </Link>
-      //   },
-      //   width: 160,
-      //   editable: true,
-      // },
       {
         field: "Update",
         headerClassName: 'super-app-theme--header',
@@ -114,12 +121,12 @@ const GridData=({data,onDelete})=> {
         headerAlign: 'center',
         renderCell: (params) => {
           const rowData = params.row;
-          const componentType = rowData.component_type;
+          const id = rowData.id;
           
           return (
             <ion-icon size="large" name="close-circle-outline" 
             onClick={() => {
-              onDelete(componentType)
+              onDelete(id)
             }}
             ></ion-icon>
           );

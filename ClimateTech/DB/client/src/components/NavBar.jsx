@@ -32,29 +32,16 @@ function NavBar({data}) {
               to="/resource"
               className="text-green-950 hover:text-green-400 transition duration-300 text-xl font-bold font-admin"
             >
-              Insert Data
+              Add Data
             </Link>
-            <Button onClick={()=>navigate('/kitchen')}>Show Details</Button>
+            {/* <Button onClick={()=>navigate('/kitchen')}>Show Details</Button> */}
             
             
           </div>
         </div>
       </div>
     </nav>
-    {offCanvas && (
-      <Offcanvas show={offCanvas} onHide={closeModal}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          {data.map((item) => (
-            <Button onClick={()=>navigate(`/${item.location}`)}>
-              {item.location}
-            </Button>
-          ))}
-        </Offcanvas.Body>
-      </Offcanvas>
-    )}
+   
     </>
   );
 }
